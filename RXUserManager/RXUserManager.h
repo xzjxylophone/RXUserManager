@@ -43,6 +43,9 @@
 - (void)loadUserInfoFromDisk;
 // 退出登录, 会发送UserLogout的消息通知
 - (void)logout;
+// 登录成功,一般在登录或者注册成功后调用此消息
+// 此消息主要是saveUserInfoToDisk和发送一个NKey_RX_UserLogin通知
+- (void)login;
 
 
 #pragma mark - Signal Mode

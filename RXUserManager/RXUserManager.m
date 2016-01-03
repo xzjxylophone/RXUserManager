@@ -24,7 +24,11 @@
     [self saveUserInfoToDisk];
     [[NSNotificationCenter defaultCenter] postNotificationName:NKey_RX_UserLogout object:nil];
 }
-
+- (void)login
+{
+    [self saveUserInfoToDisk];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NKey_RX_UserLogin object:nil];
+}
 
 - (void)saveUserInfoToDisk
 {
