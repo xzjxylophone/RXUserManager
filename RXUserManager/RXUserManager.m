@@ -40,6 +40,8 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         dic = (NSDictionary *)[self.user performSelector:toDic withObject:nil];
 #pragma clang diagnostic pop
+    } else {
+        NSLog(@"RXUserManager You Need to set a User Class toDic Selector");
     }
     [ud setValue:dic forKey:RXUserManagerUser];
     [ud synchronize];
@@ -52,6 +54,7 @@
 {
     Class cls = NSClassFromString(self.stringUserCls);
     if (cls == nil) {
+        NSLog(@"RXUserManager You Need to set a User Class");
         return;
     }
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -60,11 +63,13 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         SEL sel = NSSelectorFromString(self.stringInitializeSel);
-        
         id value = [cls alloc];
         value = (id)[value performSelector:sel withObject:dic withObject:nil];
         self.user = value;
 #pragma clang diagnostic pop
+    } else {
+        // 初始化一个空对象
+        self.user = [[cls alloc] init];
     }
     
 }
@@ -76,6 +81,8 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self.user performSelector:clear withObject:nil];
 #pragma clang diagnostic pop
+    } else {
+        NSLog(@"RXUserManager You Need to set a User Class clear Selector");
     }
 }
 
