@@ -32,7 +32,6 @@
 
 - (void)saveUserInfoToDisk
 {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSDictionary *dic = nil;
     SEL toDic = NSSelectorFromString(self.stringToDicSel);
     if ([self.user respondsToSelector:toDic]) {
@@ -43,8 +42,11 @@
     } else {
         NSLog(@"RXUserManager You Need to set a User Class toDic Selector");
     }
-    [ud setValue:dic forKey:RXUserManagerUser];
-    [ud synchronize];
+    if (dic != nil) {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        [ud setValue:dic forKey:RXUserManagerUser];
+        [ud synchronize];
+    }
     
 }
 

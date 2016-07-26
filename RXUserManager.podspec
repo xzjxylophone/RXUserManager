@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name     = "RXUserManager"
-  s.version  = "0.3"
+  s.version  = "0.4"
   s.license  = "MIT"
   s.summary  = "RXUserManager is a user manager"
   s.homepage = "https://github.com/xzjxylophone/RXUserManager"
