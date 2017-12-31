@@ -23,17 +23,16 @@
 @interface RXUserManager : NSObject
 
 // 用户信息
-@property (nonatomic, strong) id user;
+@property (nonatomic, strong, nonnull) id user;
 
 // 用户信息的类名
-@property (nonatomic, copy) NSString *stringUserCls;
-// 把dic转换为User的初始化消息名称
-// 需要记得最后面带:, 因为这个是需要参数的
-@property (nonatomic, copy) NSString *stringInitializeSel;
-// 把用户信息转换为Dic的消息名称
-@property (nonatomic, copy) NSString *stringToDicSel;
-// 把用户信息清空的的消息名称
-@property (nonatomic, copy) NSString *stringClearSel;
+@property (nonatomic, copy, nonnull) NSString * stringUserCls;
+// 把dic转换为User的初始化SEL名称
+@property (nonatomic, copy, nonnull) NSString *stringInitializeSel;
+// 把用户信息转换为Dic的SEL名称
+@property (nonatomic, copy, nonnull) NSString *stringToDicSel;
+// 把用户信息清空的的SEL名称
+@property (nonatomic, copy, nonnull) NSString *stringClearSel;
 
 
 
@@ -41,13 +40,19 @@
 - (void)saveUserInfoToDisk;
 // 从磁盘信息加载用户信息
 - (void)loadUserInfoFromDisk;
-// 退出登录, 会发送UserLogout的消息通知
-- (void)logout;
-// 登录成功,一般在登录或者注册成功后调用此消息
-// 此消息主要是saveUserInfoToDisk和发送一个NKey_RX_UserLogin通知
+
+
+// 登录成功,会发送一个NKey_RX_UserLogin通知
 - (void)login;
+- (void)loginWithObject:(nullable id)object;
+
+// 退出登录,会发送NKey_RX_UserLogout的消息通知
+- (void)logout;
+- (void)logoutWithObject:(nullable id)object;
 
 
 #pragma mark - Signal Mode
-+ (RXUserManager *)sharedInstance;
+// 不会初始化用户信息,需要手动调用loadUserInfoFromDisk
+// 因为需要配置相关的参数
++ (RXUserManager *_Nonnull)sharedInstance;
 @end

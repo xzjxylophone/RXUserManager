@@ -18,16 +18,24 @@
 
 
 
+- (void)login
+{
+    [self loginWithObject:nil];
+}
+- (void)loginWithObject:(id)object
+{
+    [self saveUserInfoToDisk];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NKey_RX_UserLogin object:object];
+}
 - (void)logout
+{
+    [self logoutWithObject:nil];
+}
+- (void)logoutWithObject:(id)object
 {
     [self clearUserInfo];
     [self saveUserInfoToDisk];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NKey_RX_UserLogout object:nil];
-}
-- (void)login
-{
-    [self saveUserInfoToDisk];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NKey_RX_UserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NKey_RX_UserLogout object:object];
 }
 
 - (void)saveUserInfoToDisk
